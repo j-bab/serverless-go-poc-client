@@ -8,7 +8,7 @@ If you haven't already, first [deploy your infrastructure](https://github.com/j-
 
 in package.json replace the following placeholders:  
 YOUR_BUCKET_NAME - replace this with the name of the s3 bucket you wish to deploy to.  
-YOUR_CF_DIST_ID  .  replace this with the cloudFront distribution ID that this will be served over.
+YOUR_CF_DIST_ID - replace this with the cloudFront distribution ID that this will be served over.
 
 run `npm install` to install the required dependencies.
 
