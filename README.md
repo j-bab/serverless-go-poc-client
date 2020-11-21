@@ -6,9 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 If you haven't already, first [deploy your infrastructure](https://github.com/j-bab/serverless-go-poc):
 
-in package.json replace the following placeholders:  
-YOUR_BUCKET_NAME - replace this with the name of the s3 bucket you wish to deploy to.  
-YOUR_CF_DIST_ID - replace this with the cloudFront distribution ID that this will be served over.
+in package.json replace the following placeholders with values from the Infrastructure created above:  
+YOUR_BUCKET_NAME - replace this with the name of the s3 AppBucket you wish to deploy to.
+YOUR_CF_DIST_ID - replace this with the cloudFront distribution ID that this bucket will be served over.
 
 run `npm install` to install the required dependencies.
 
