@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+You can test it running live [here](https://d1cs1i2yz977l1.cloudfront.net/)
+
 ## Configuration and getting started
 
 If you haven't already, first [deploy your infrastructure](https://github.com/j-bab/serverless-go-poc):
