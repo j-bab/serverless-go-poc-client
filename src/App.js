@@ -20,7 +20,7 @@ function App() {
                     <h2 className="text-center">Notes client</h2>
                     <h4 className="text-center"> for serverless Go Api</h4>
                         <hr/>
-                    <Notes users={userList}/>
+                    <Notes users={userList} defaultUserId="1"/>
                 </Col>
                 <Col sm={3}/>
             </Row>
