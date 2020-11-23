@@ -56,6 +56,7 @@ export default class Notes extends Component {
         try {
             const notes = await invokeApi({path: "/notes/" + encodeURIComponent(userId)});
             this.setState({notes});
+            document.title = `${notes.length} Serverless Notes`;
         } catch (e) {
             alert(e);
         }
