@@ -4,6 +4,7 @@ import React from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Note from "../components/Note";
+import {UsersContext} from "../UsersContext";
 
 export default class NoteList extends Component {
     static propTypes = {
@@ -11,10 +12,12 @@ export default class NoteList extends Component {
         notes: PropTypes.arrayOf(PropTypes.object).isRequired
     };
 
+    static contextType = UsersContext;
+
     render() {
 
-        let notesList = this.props.notes.map( (note, i) => {
-            note.userName = this.props.users.filter(obj => {
+        let notesList = this.props.notes.map((note, i) => {
+            note.userName = this.context.filter(obj => {
                 return obj.userId === note.userId
             })[0].name;
             return <Note key={i} {...note} />;

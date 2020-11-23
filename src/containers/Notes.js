@@ -8,6 +8,7 @@ import Col from "react-bootstrap/esm/Col";
 import Nav from "react-bootstrap/esm/Nav";
 import NoteCreateModal from "../containers/NoteCreateModal";
 import {invokeApi} from "../lib/api";
+import {UsersContext} from "../UsersContext";
 
 export default class Notes extends Component {
 
@@ -15,6 +16,7 @@ export default class Notes extends Component {
         defaultUserId: PropTypes.string.isRequired,
         users: PropTypes.arrayOf(PropTypes.object).isRequired
     };
+    static contextType = UsersContext;
 
     constructor(props) {
         super(props);
@@ -62,8 +64,7 @@ export default class Notes extends Component {
 
 
     render() {
-        let users = this.props.users;
-        let currentUser = users.filter(obj => {
+        let currentUser = this.context.filter(obj => {
             return obj.userId === this.state.userId
         })[0];
 
@@ -85,7 +86,7 @@ export default class Notes extends Component {
                                 Add Note
                             </Nav.Link>
                         </Nav.Item>
-                        <UserSelect users={users} isLoading={this.state.isLoading} onSwitch={(userId) => {
+                        <UserSelect isLoading={this.state.isLoading} onSwitch={(userId) => {
                             this.setUserId(userId)
                         }}/>
                     </Nav>
@@ -95,7 +96,7 @@ export default class Notes extends Component {
                 </Col>
             </Row>
 
-            <NoteList users={users} notes={this.state.notes}
+            <NoteList notes={this.state.notes}
                       isBlurred={(this.state.showAddModal || this.state.isLoading)}/>
 
         </React.Fragment>

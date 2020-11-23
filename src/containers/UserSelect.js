@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import React from "react";
 import Spinner from "react-bootstrap/esm/Spinner";
 import NavDropdown from "react-bootstrap/esm/NavDropdown";
+import {UsersContext} from "../UsersContext";
 
 export default class UserSelect extends Component {
     static propTypes = {
         onSwitch: PropTypes.func.isRequired,
-        users: PropTypes.arrayOf(PropTypes.object).isRequired,
         currentUser: PropTypes.shape({
             userId: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired
@@ -15,10 +15,11 @@ export default class UserSelect extends Component {
         isLoading: PropTypes.bool.isRequired,
     };
 
+    static contextType = UsersContext;
 
     render() {
 
-        let userList = this.props.users.map( (user)  => {
+        let userList = this.context.map( (user)  => {
             return <NavDropdown.Item onClick={()=>this.props.onSwitch(user.userId)} key={user.userId}>{user.name}</NavDropdown.Item>;
         });
 
