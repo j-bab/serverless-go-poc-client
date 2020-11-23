@@ -12,6 +12,8 @@ in package.json replace the following placeholders with values from the Infrastr
 YOUR_BUCKET_NAME - replace this with the name of the s3 AppBucket you wish to deploy to.
 YOUR_CF_DIST_ID - replace this with the cloudFront distribution ID that this bucket will be served over.
 
+in the .env files set REACT_APP_API_GATEWAY to your Api Gateway endpoint  
+
 run `npm install` to install the required dependencies.
 
 
