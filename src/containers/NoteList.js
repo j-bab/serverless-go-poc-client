@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
-import Note from "../components/Note";
+import Note from "./Note";
 import {UsersContext} from "../UsersContext";
 
 export default class NoteList extends Component {
