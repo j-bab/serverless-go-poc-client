@@ -6,6 +6,7 @@ import NavDropdown from "react-bootstrap/esm/NavDropdown";
 
 export default class UserSelect extends Component {
     static propTypes = {
+        onSwitch: PropTypes.func.isRequired,
         users: PropTypes.arrayOf(PropTypes.object).isRequired,
         currentUser: PropTypes.shape({
             userId: PropTypes.string.isRequired,
@@ -17,8 +18,8 @@ export default class UserSelect extends Component {
 
     render() {
 
-        let userList = this.props.users.map(function (user) {
-            return <NavDropdown.Item href="#/" key={user.userId}>{user.name}</NavDropdown.Item>;
+        let userList = this.props.users.map( (user)  => {
+            return <NavDropdown.Item onClick={()=>this.props.onSwitch(user.userId)} key={user.userId}>{user.name}</NavDropdown.Item>;
         });
 
         return this.props.isLoading ? <Spinner animation="border"/> :
