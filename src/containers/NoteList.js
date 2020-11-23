@@ -25,9 +25,9 @@ export default class NoteList extends Component {
         return <React.Fragment>
             <Row style={{"filter": "blur(" + blur + ")"}}>
                 <Col sm={12}>
+                    {notesList}
                 </Col>
             </Row>
-            {notesList}
         </React.Fragment>
     }
 }
