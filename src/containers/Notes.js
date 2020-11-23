@@ -1,27 +1,38 @@
 import {Component} from 'react';
 import React from "react";
-import NoteMenu from "./NoteMenu";
+import UserSelect from "./UserSelect";
 import NoteList from "./NoteList";
-import Spinner from "react-bootstrap/esm/Spinner";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import Nav from "react-bootstrap/esm/Nav";
+import NoteCreateModal from "../containers/NoteCreateModal";
 
 export default class Notes extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showAddModal: false,
+            isLoading: false,
+            userId: "2",
+        };
+    }
+
+    addNewNote(text) {
+        this.setModalShow(false)
+        console.log(text);
+    }
+
+    setModalShow(showAddModal) {
+        this.setState({showAddModal});
+    }
+
+
     render() {
-
-        let users = [
-            {userId: "1", name: "John"},
-            {userId: "2", name: "James"},
-            {userId: "3", name: "Dan"},
-        ];
-
-        let isLoading = false;
-
-        let userId = "3";
-
+        let users = this.props.users;
         let currentUser = users.filter(obj => {
-            return obj.userId === userId
+            return obj.userId === this.state.userId
         })[0];
 
         let notes = [
@@ -37,25 +48,30 @@ export default class Notes extends Component {
             }
         ];
 
-
         return <React.Fragment>
             <Row>
-                <Col sm={8}  className="text-left">
-                    <strong>{isLoading ? "Loading " : "Found " + notes.length} notes for {currentUser.name}</strong>
+                <Col sm={8} className="text-left">
+                    <strong>{this.state.isLoading ? "Loading " : "Found " + notes.length} notes
+                        for {currentUser.name}</strong>
                 </Col>
                 <Col sm={4}>
-                    <NoteMenu users={users} currentUser={currentUser} isLoading={isLoading} />
+                    <Nav>
+                        <Nav.Item>
+                            <Nav.Link
+                                onClick={() => this.setModalShow(true)}>
+                                Add Note
+                            </Nav.Link>
+                        </Nav.Item>
+                        <UserSelect users={users} isLoading={this.state.isLoading}/>
+                    </Nav>
+                    <NoteCreateModal show={this.state.showAddModal}
+                                     onHide={() => this.setModalShow(false)}
+                                     onSave={(text) => this.addNewNote(text)}/>
                 </Col>
             </Row>
 
-        {isLoading ?
-            <Spinner animation="border"/>
-            :
-            <React.Fragment>
-                <NoteList notes={notes} isLoading={false}/>
+            <NoteList users={users} notes={notes} isBlurred={(this.state.showAddModal || this.state.isLoading)}/>
 
-            </React.Fragment>
-        }
         </React.Fragment>
     }
 }

@@ -2,10 +2,9 @@ import {Component} from 'react';
 import PropTypes from 'prop-types';
 import React from "react";
 import Spinner from "react-bootstrap/esm/Spinner";
-import Nav from "react-bootstrap/esm/Nav";
 import NavDropdown from "react-bootstrap/esm/NavDropdown";
 
-export default class NoteMenu extends Component {
+export default class UserSelect extends Component {
     static propTypes = {
         users: PropTypes.arrayOf(PropTypes.object).isRequired,
         currentUser: PropTypes.shape({
@@ -23,15 +22,8 @@ export default class NoteMenu extends Component {
         });
 
         return this.props.isLoading ? <Spinner animation="border"/> :
-            <Nav>
-                <Nav.Item>
-                    <Nav.Link>
-                        Add Note
-                    </Nav.Link>
-                </Nav.Item>
                 <NavDropdown title="Change User" id="nav-dropdown">
                     {userList}
                 </NavDropdown>
-            </Nav>
     }
 }

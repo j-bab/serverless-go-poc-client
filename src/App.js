@@ -7,6 +7,11 @@ import Col from "react-bootstrap/esm/Col";
 
 function App() {
 
+    let userList = [
+        {userId: "1", name: "John"},
+        {userId: "2", name: "James"},
+        {userId: "3", name: "Dan"},
+    ];
     return <div className="App">
         <Container fluid>
             <Row>
@@ -15,7 +20,7 @@ function App() {
                     <h2 className="text-center">Notes client</h2>
                     <h4 className="text-center"> for serverless Go Api</h4>
                         <hr/>
-                    <Notes/>
+                    <Notes users={userList}/>
                 </Col>
                 <Col sm={3}/>
             </Row>

@@ -7,22 +7,23 @@ import Note from "../components/Note";
 
 export default class NoteList extends Component {
     static propTypes = {
-        notes: PropTypes.arrayOf(PropTypes.object).isRequired,
-        currentUser: PropTypes.shape({
-            userId: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired
-        }),
+        isBlurred: PropTypes.bool.isRequired,
+        notes: PropTypes.arrayOf(PropTypes.object).isRequired
     };
 
     render() {
 
-        let notesList = this.props.notes.map(function (note, i) {
+        let notesList = this.props.notes.map( (note, i) => {
+            note.userName = this.props.users.filter(obj => {
+                return obj.userId === note.userId
+            })[0].name;
             return <Note key={i} {...note} />;
         });
 
+        let blur = this.props.isBlurred ? "8px" : 0;
 
         return <React.Fragment>
-            <Row>
+            <Row style={{"filter": "blur(" + blur + ")"}}>
                 <Col sm={12}>
                 </Col>
             </Row>
