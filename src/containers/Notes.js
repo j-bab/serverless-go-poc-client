@@ -13,8 +13,7 @@ import {UsersContext} from "../UsersContext";
 export default class Notes extends Component {
 
     static propTypes = {
-        defaultUserId: PropTypes.string.isRequired,
-        users: PropTypes.arrayOf(PropTypes.object).isRequired
+        defaultUserId: PropTypes.string.isRequired
     };
     static contextType = UsersContext;
 
