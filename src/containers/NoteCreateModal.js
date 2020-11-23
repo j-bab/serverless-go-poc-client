@@ -20,20 +20,21 @@ export default class NoteCreateModal extends Component {
             noteText: "",
         };
     }
-    closeModal  = () => {
+
+    closeModal = () => {
         this.props.onHide();
         this.clearModal();
-    }
+    };
 
 
-    saveForm  = () => {
+    saveForm = () => {
         this.props.onSave(this.state.noteText);
         this.clearModal();
-    }
+    };
 
-    clearModal  = () => {
-        this.setState({noteText:""});
-    }
+    clearModal = () => {
+        this.setState({noteText: ""});
+    };
 
 
     render() {
@@ -54,7 +55,9 @@ export default class NoteCreateModal extends Component {
                 <Form>
                     <Form.Group>
                         <Form.Label>What do you need to remember?</Form.Label>
-                        <Form.Control as="textarea" rows={3} value={this.state.noteText} onChange={(e)=>{this.setState({noteText:e.target.value})} } />
+                        <Form.Control as="textarea" rows={3} value={this.state.noteText} onChange={(e) => {
+                            this.setState({noteText: e.target.value})
+                        }}/>
                     </Form.Group>
                 </Form>
             </Modal.Body>
