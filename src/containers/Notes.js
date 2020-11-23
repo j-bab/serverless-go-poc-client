@@ -23,7 +23,7 @@ export default class Notes extends Component {
             showAddModal: false,
             isLoading: true,
             userId: false,
-            notes:[]
+            notes: []
         };
         this.setUserId = this.setUserId.bind(this);
     }
@@ -32,11 +32,17 @@ export default class Notes extends Component {
         this.setUserId(this.props.defaultUserId);
     }
 
-
-
-    addNewNote(text) {
-        this.setModalShow(false)
-        console.log(text);
+    async addNewNote(text) {
+        let userId = this.state.userId;
+        this.setModalShow(false);
+        this.setState({isLoading: true});
+        try {
+            await invokeApi({method: "POST", path: "/notes/" + encodeURIComponent(userId), body: {"body": text}});
+            await this.setUserId(userId)
+        } catch (e) {
+            alert(e);
+        }
+        this.setState({isLoading: false});
     }
 
     setModalShow(showAddModal) {
@@ -44,7 +50,7 @@ export default class Notes extends Component {
     }
 
     async setUserId(userId) {
-        this.setState({isLoading: true,userId});
+        this.setState({isLoading: true, userId});
         try {
             const notes = await invokeApi({path: "/notes/" + encodeURIComponent(userId)});
             this.setState({notes});
@@ -66,7 +72,8 @@ export default class Notes extends Component {
                 <Col sm={8} className="text-left">
                     {
                         currentUser ?
-                            <strong>{this.state.isLoading ? "Loading " : "Found " + this.state.notes.length} notes for {currentUser.name}</strong>
+                            <strong>{this.state.isLoading ? "Loading " : "Found " + this.state.notes.length} notes
+                                for {currentUser.name}</strong>
                             : null
                     }
                 </Col>
@@ -78,7 +85,9 @@ export default class Notes extends Component {
                                 Add Note
                             </Nav.Link>
                         </Nav.Item>
-                        <UserSelect users={users} isLoading={this.state.isLoading} onSwitch={(userId)=>{this.setUserId(userId)}}/>
+                        <UserSelect users={users} isLoading={this.state.isLoading} onSwitch={(userId) => {
+                            this.setUserId(userId)
+                        }}/>
                     </Nav>
                     <NoteCreateModal show={this.state.showAddModal}
                                      onHide={() => this.setModalShow(false)}
@@ -86,7 +95,8 @@ export default class Notes extends Component {
                 </Col>
             </Row>
 
-            <NoteList users={users} notes={this.state.notes} isBlurred={(this.state.showAddModal || this.state.isLoading)}/>
+            <NoteList users={users} notes={this.state.notes}
+                      isBlurred={(this.state.showAddModal || this.state.isLoading)}/>
 
         </React.Fragment>
     }
